@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:contacts/ui/common/custom_icon.dart';
 import 'package:contacts/ui/home/components/user_box.dart';
 import 'package:contacts/ui/home/home_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -11,13 +12,25 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("User List"),
-      ),
-      body: ViewModelBuilder.reactive(
-        viewModelBuilder: () => HomeViewModel(),
-        builder: (context, viewModel, child) => viewModel.isBusy
+    return ViewModelBuilder.reactive(
+      viewModelBuilder: () => HomeViewModel(),
+      builder: (context, viewModel, child) => Scaffold(
+        appBar: AppBar(
+          title: const Text("User List"),
+          actions: viewModel.isBusy
+              ? null
+              : [
+                  IconButton(
+                    icon: CustomIcon(viewModel.ageSortIcon),
+                    onPressed: viewModel.toggleAgeSort,
+                  ),
+                  IconButton(
+                    icon: CustomIcon(viewModel.nameSortIcon),
+                    onPressed: viewModel.toggleNameSort,
+                  ),
+                ],
+        ),
+        body: viewModel.isBusy
             ? const Center(child: CircularProgressIndicator())
             : ReorderableGridView.count(
                 proxyDecorator: _proxyDecorator,
