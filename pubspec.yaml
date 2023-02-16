@@ -30,10 +30,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  # UI
   google_fonts: ^4.0.3
+
+  # Architecture
   stacked: ^3.1.0+3
   stacked_services: ^0.9.9
 
+  # Network
+  dio: ^4.0.6
+  json_annotation: ^4.8.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -44,6 +51,7 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^2.3.3
   stacked_generator: ^0.8.5
+  json_serializable: ^6.6.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
