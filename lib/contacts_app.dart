@@ -1,5 +1,5 @@
+import 'package:contacts/stacked/stacked_app.router.dart';
 import 'package:contacts/theme/custom_theme.dart';
-import 'package:contacts/ui/home/home_view.dart';
 import 'package:flutter/material.dart';
 
 class ContactsApp extends StatelessWidget {
@@ -10,7 +10,7 @@ class ContactsApp extends StatelessWidget {
     return MaterialApp(
       title: "Contacts",
       theme: CustomTheme.lightTheme,
-      home: const HomeView(),
+      onGenerateRoute: StackedRouter().onGenerateRoute,
     );
   }
 }
