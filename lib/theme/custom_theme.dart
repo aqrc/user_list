@@ -4,10 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomTheme {
   static ThemeData lightTheme = ThemeData(
+    shadowColor: CustomColors.shadow,
     colorScheme: const ColorScheme.light(
       primary: CustomColors.softPeach,
-      onPrimary: Colors.black,
+      onPrimary: CustomColors.black,
     ),
-    textTheme: GoogleFonts.heeboTextTheme()
+    textTheme: GoogleFonts.heeboTextTheme(),
+    appBarTheme: const AppBarTheme(
+      shadowColor: CustomColors.shadow,
+    ),
   );
 }

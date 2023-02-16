@@ -10,11 +10,13 @@ class RandomUser {
   final Name name;
   final Birthdate dob;
   final Picture picture;
+  final String email;
 
   RandomUser({
     required this.name,
     required this.dob,
     required this.picture,
+    required this.email,
   });
 
   factory RandomUser.fromJson(Map<String, dynamic> json) =>

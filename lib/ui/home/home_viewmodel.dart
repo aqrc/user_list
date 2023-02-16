@@ -16,11 +16,15 @@ class HomeViewModel extends FutureViewModel<List<User>> {
   Future<List<User>> futureToRun() async {
     final randomUsers = await _randomUserApiClient.getRandomUsers();
     return randomUsers
-        .map((randomUser) => User(
-              name: "${randomUser.name.first} ${randomUser.name.last}",
-              age: randomUser.dob.age,
-              avatarUrl: randomUser.picture.large,
-            ))
+        .map(
+          (randomUser) => User(
+            firstname: randomUser.name.first,
+            lastname: randomUser.name.last,
+            age: randomUser.dob.age,
+            avatarUrl: randomUser.picture.large,
+            email: randomUser.email,
+          ),
+        )
         .toList();
   }
 }

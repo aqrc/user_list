@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:contacts/ui/home/components/user_box.dart';
 import 'package:contacts/ui/home/home_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -18,19 +20,42 @@ class HomeView extends StatelessWidget {
         builder: (context, viewModel, child) => viewModel.isBusy
             ? const Center(child: CircularProgressIndicator())
             : ReorderableGridView.count(
+                proxyDecorator: _proxyDecorator,
                 padding: const EdgeInsets.all(20),
                 crossAxisCount: 2,
                 crossAxisSpacing: 8,
                 mainAxisSpacing: 8,
                 onReorder: viewModel.reorder,
                 children: viewModel.data!
-                    .map((user) => UserBox(
-                          key: ValueKey(user.name),
-                          user: user,
-                        ))
+                    .map(
+                      (user) => UserBox(
+                        key: ValueKey(user.email),
+                        user: user,
+                      ),
+                    )
                     .toList(),
               ),
       ),
+    );
+  }
+
+  Widget _proxyDecorator(Widget child, int index, Animation<double> animation) {
+    return AnimatedBuilder(
+      animation: animation,
+      builder: (BuildContext context, Widget? child) {
+        final animValue = Curves.easeInOut.transform(animation.value);
+        final elevation = lerpDouble(
+          UserBox.initialElevation,
+          12,
+          animValue,
+        );
+        return Material(
+          borderRadius: UserBox.borderRadius,
+          elevation: elevation!,
+          child: child,
+        );
+      },
+      child: child,
     );
   }
 }
