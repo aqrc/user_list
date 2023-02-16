@@ -1,3 +1,3 @@
 # user_list
 
-Take-home coding assignment. API that loads data from files and calculates statistics of the requested user. Done using Spring Boot.
+Take-home coding assignment. Flutter application showing users from randomuser.me with sorts and reordering.
