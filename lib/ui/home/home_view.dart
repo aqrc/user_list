@@ -1,4 +1,8 @@
+import 'package:contacts/ui/home/components/user_box.dart';
+import 'package:contacts/ui/home/home_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:reorderable_grid/reorderable_grid.dart';
+import 'package:stacked/stacked.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -8,6 +12,24 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("User List"),
+      ),
+      body: ViewModelBuilder.reactive(
+        viewModelBuilder: () => HomeViewModel(),
+        builder: (context, viewModel, child) => viewModel.isBusy
+            ? const Center(child: CircularProgressIndicator())
+            : ReorderableGridView.count(
+                padding: const EdgeInsets.all(20),
+                crossAxisCount: 2,
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
+                onReorder: viewModel.reorder,
+                children: viewModel.data!
+                    .map((user) => UserBox(
+                          key: ValueKey(user.name),
+                          user: user,
+                        ))
+                    .toList(),
+              ),
       ),
     );
   }
